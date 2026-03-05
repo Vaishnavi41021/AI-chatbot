@@ -8,7 +8,7 @@ from huggingface_hub import InferenceClient
 load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")
 
-MODEL_ID = "mistralai/Mistral-7B-Instruct-v0.2"
+MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
 client = InferenceClient(model=MODEL_ID, token=HF_TOKEN)
 
 app = Flask(__name__)
@@ -28,10 +28,10 @@ def chat():
 
     try:
         resp = client.chat_completion(
-            messages=messages,
-            max_tokens=300,
-            temperature=0.7,
-            top_p=0.9
+             messages=messages,
+             max_tokens=600,
+             temperature=0.7,
+             top_p=0.9
         )
 
         bot_text = resp.choices[0].message["content"]
